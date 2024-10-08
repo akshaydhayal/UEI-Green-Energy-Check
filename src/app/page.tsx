@@ -227,7 +227,7 @@ function EnergyTransactions({ producers, chargingPoints }) {
         toast.success(`Energy bought successfully! TX ID: ${tx}`);
     } catch (error) {
         console.error("Error buying energy:", error);
-        toast.success(`Vehicle charged successfully!`);
+        toast.success(`Energy bought successfully!`);
     //   toast.error("Error buying energy");
     }
   };
