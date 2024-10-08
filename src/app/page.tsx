@@ -13,7 +13,8 @@ import { Zap, PlusCircle, Battery, DollarSign, Leaf } from "lucide-react";
 
 import "@solana/wallet-adapter-react-ui/styles.css";
 
-const programID = new PublicKey("6CDhdAhZnzBSMk76Yq4cUnmMpZuFQp8fUeYuM3hG85n5");
+// const programID = new PublicKey("6CDhdAhZnzBSMk76Yq4cUnmMpZuFQp8fUeYuM3hG85n5");
+const programID = new PublicKey("7hY3HD36Q3ckMFzCw7unyqUWQcMGhU8Dc9JmeWCFtghq");
 
 //@ts-expect-error ignore
 const getProgram = (connection: web3.Connection, wallet) => {
@@ -67,7 +68,7 @@ function ProducerForm() {
         <div className="mb-4">
           <label className="block text-gray-300 text-sm font-bold mb-2 flex items-center">
             <input type="checkbox" checked={isGreen} onChange={(e) => setIsGreen(e.target.checked)} className="mr-2" />
-            {isGreen ? <Leaf className="mr-2" /> : <Leaf className="mr-2" />} Is Green Energy?
+            {isGreen ? <Leaf className="mr-2" /> : <Leaf className="mr-2" />} Is it a Green Energy Producer?
           </label>
         </div>
         <div className="mb-4">
@@ -240,7 +241,27 @@ function EnergyTransactions({ producers, chargingPoints }) {
     if (!anchorWallet?.publicKey || !selectedChargingPoint2) return;
 
     const program = getProgram(connection, anchorWallet);
-    
+    // [
+    //   {
+    //     publicKey: "ABSqPNstsycp339UyJfvqGmRFN2r81fGf6fFtFQTTw3",
+    //     account: {
+    //       owner: "9xC59Dbnm2LWrrSGKewbsdusTJfCdMwQpZHmZrTGMZxx",
+    //       greenEnergy: "00",
+    //       nonGreenEnergy: "00",
+    //       greenPrice: "0e",
+    //       nonGreenPrice: "0f",
+    //     },
+    //   },
+    // ];
+    //@ts-expect-error ignore
+    const f = chargingPoints.filter((c) => c.publicKey.toString() == selectedChargingPoint2);
+    console.log("f", f[0], f[0].account.greenEnergy.toNumber(), f[0].account.nonGreenEnergy.toNumber(), amount2);
+    console.log('useg',useGreen);
+    if (useGreen ? f[0].account.greenEnergy.toNumber() < amount2 : f[0].account.nonGreenEnergy.toNumber() < amount2) {
+      alert("Sorry,not Sufficient energy present in Charger");
+      return;
+    }
+   
     try {
         const tx = await program.methods
         .chargeVehicle(new BN(amount2), useGreen)
@@ -264,11 +285,11 @@ function EnergyTransactions({ producers, chargingPoints }) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <form onSubmit={handleBuyEnergy}>
           <h3 className="text-xl font-bold mb-2 text-white flex items-center">
-            <DollarSign className="mr-2" /> Buy Energy
+            <DollarSign className="mr-2" /> Buy Energy from a Producer
           </h3>
           <div className="mb-4">
             <label className="block text-gray-300 text-sm font-bold mb-2" htmlFor="producerSelect">
-              Select Producer
+              Select Producer to buy from
             </label>
             <select
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-700 text-white"
@@ -287,7 +308,7 @@ function EnergyTransactions({ producers, chargingPoints }) {
           </div>
           <div className="mb-4">
             <label className="block text-gray-300 text-sm font-bold mb-2" htmlFor="chargingPointSelect">
-              Select Charging Point
+              Select Charging Point to buy for
             </label>
             <select
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-700 text-white"
@@ -306,7 +327,7 @@ function EnergyTransactions({ producers, chargingPoints }) {
           </div>
           <div className="mb-4">
             <label className="block text-gray-300 text-sm font-bold mb-2" htmlFor="buyAmount">
-              Amount
+              No of Energy Units to buy
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-700 text-white"
@@ -314,7 +335,7 @@ function EnergyTransactions({ producers, chargingPoints }) {
               type="number"
               value={amount1}
               onChange={(e) => setAmount1(e.target.value)}
-              placeholder="Amount"
+              placeholder="Units quantity to buy"
             />
           </div>
           <button className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
@@ -323,11 +344,11 @@ function EnergyTransactions({ producers, chargingPoints }) {
         </form>
         <form onSubmit={handleChargeVehicle}>
           <h3 className="text-xl font-bold mb-2 text-white flex items-center">
-            <Battery className="mr-2" /> Charge Vehicle
+            <Battery className="mr-2" /> Charge your Vehicle from Charging Point
           </h3>
           <div className="mb-4">
             <label className="block text-gray-300 text-sm font-bold mb-2" htmlFor="chargingPointSelect">
-              Select Charging Point
+              Select Charger from where to charge
             </label>
             <select
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-700 text-white"
@@ -346,7 +367,7 @@ function EnergyTransactions({ producers, chargingPoints }) {
           </div>
           <div className="mb-4">
             <label className="block text-gray-300 text-sm font-bold mb-2" htmlFor="chargeAmount">
-              Amount
+              Amount of Units need to charge
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-gray-700 text-white"
@@ -354,13 +375,13 @@ function EnergyTransactions({ producers, chargingPoints }) {
               type="number"
               value={amount2}
               onChange={(e) => setAmount2(e.target.value)}
-              placeholder="Amount"
+              placeholder="Energy units need for charging"
             />
           </div>
           <div className="mb-4">
             <label className="block text-gray-300 text-sm font-bold mb-2">
               <input type="checkbox" checked={useGreen} onChange={(e) => setUseGreen(e.target.checked)} className="mr-2" />
-              Use Green Energy? <Leaf className="inline ml-1" />
+              Select if you want to use Green Energy? <Leaf className="inline ml-1" />
             </label>
           </div>
           <button className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
