@@ -1,0 +1,84 @@
+{
+  "version": "0.1.0",
+  "name": "green_energy_management",
+  "instructions": [
+    {
+      "name": "createProducer",
+      "accounts": [
+        { "name": "producer", "isMut": true, "isSigner": true },
+        { "name": "owner", "isMut": true, "isSigner": true },
+        { "name": "systemProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": [
+        { "name": "isGreen", "type": "bool" },
+        { "name": "initialEnergy", "type": "u64" },
+        { "name": "price", "type": "u64" }
+      ]
+    },
+    {
+      "name": "createChargingPoint",
+      "accounts": [
+        { "name": "chargingPoint", "isMut": true, "isSigner": true },
+        { "name": "owner", "isMut": true, "isSigner": true },
+        { "name": "systemProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": [
+        { "name": "greenPrice", "type": "u64" },
+        { "name": "nonGreenPrice", "type": "u64" }
+      ]
+    },
+    {
+      "name": "buyEnergy",
+      "accounts": [
+        { "name": "producer", "isMut": true, "isSigner": false },
+        { "name": "chargingPoint", "isMut": true, "isSigner": false },
+        { "name": "buyer", "isMut": false, "isSigner": true }
+      ],
+      "args": [{ "name": "amount", "type": "u64" }]
+    },
+    {
+      "name": "chargeVehicle",
+      "accounts": [
+        { "name": "chargingPoint", "isMut": true, "isSigner": false },
+        { "name": "consumer", "isMut": false, "isSigner": true }
+      ],
+      "args": [
+        { "name": "amount", "type": "u64" },
+        { "name": "useGreen", "type": "bool" }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Producer",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "owner", "type": "publicKey" },
+          { "name": "isGreen", "type": "bool" },
+          { "name": "energy", "type": "u64" },
+          { "name": "price", "type": "u64" },
+          { "name": "rec", "type": "u64" }
+        ]
+      }
+    },
+    {
+      "name": "ChargingPoint",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "owner", "type": "publicKey" },
+          { "name": "greenEnergy", "type": "u64" },
+          { "name": "nonGreenEnergy", "type": "u64" },
+          { "name": "greenPrice", "type": "u64" },
+          { "name": "nonGreenPrice", "type": "u64" }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    { "code": 6000, "name": "InsufficientEnergy", "msg": "Insufficient energy available" },
+    { "code": 6001, "name": "InsufficientGreenEnergy", "msg": "Insufficient green energy available" },
+    { "code": 6002, "name": "InsufficientNonGreenEnergy", "msg": "Insufficient non-green energy available" }
+  ]
+}
