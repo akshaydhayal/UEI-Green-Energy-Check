@@ -1,5 +1,5 @@
 // app/layout.tsx
-import { WalletProvider, WalletProviderWrapper } from "@/components/WalletProvider";
+import {  WalletProviderWrapper } from "@/components/WalletProvider";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
