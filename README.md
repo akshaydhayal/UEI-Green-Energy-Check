@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# UEI Green Energy Check
 
-## Getting Started
+Live Project Link: [https://uei-green-energy-check.vercel.app/](https://uei-green-energy-check.vercel.app/)
 
-First, run the development server:
+## Description
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This decentralized energy marketplace is built on the Solana blockchain, enabling users to manage and trade renewable and non-renewable energy. The platform allows energy producers to list available energy at a specified rate, while consumers can purchase energy and charge their electric vehicles (EVs) using energy from designated charging points. It incorporates Solana's smart contracts to ensure seamless and transparent transactions between producers, consumers, and charging stations. The focus is on promoting green energy, with a mechanism to differentiate between green and non-green energy, supporting the transition to renewable energy sources.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Energy Producer Creation:**:Producers can register as energy providers by defining the total energy available and setting rates for green or non-green energy.
+- **Charging Point Setup:**: Charging station owners can create charging points, specifying different rates for green and non-green energy.
+- **Chargin Points buys From Producers**: The Charging Points buy from Producers(they buy from Green Producers if they want green energy or vice versa)
+- **EV Charging thorugh Charging Points:**:  Users can charge their EVs at charging stations using the purchased energy.They can opt for if they want to use Green or Non Green Energy. The system checks for sufficient energy availability (green or non-green) before proceeding with the charging process.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Website Demo
 
-## Learn More
+![Mission Dashboard](https://github.com/akshaydhayal/UEI-Green-Energy-Check/blob/main/Green-Energy-Management.png)
 
-To learn more about Next.js, take a look at the following resources:
+*Figure 1: Create Energy Producers and Charginf Points to interact with later*
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+![Mission Details](https://github.com/akshaydhayal/UEI-Green-Energy-Check/blob/main/Green-Energy-Management%20(1).png)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+*Figure 2: Energy Transactions Section(b/w Producer-Charging Point and b/w Charging Point-Consumer)*
+![Mission Details](https://github.com/akshaydhayal/UEI-Green-Energy-Check/blob/main/Green-Energy-Management%20(2).png)
 
-## Deploy on Vercel
+*Figure 3: All Available Producers and Charging Points created*
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Video Demo:
+
+[https://www.loom.com/share/598e67c7c9374cda816deeb82681077e?sid=8655ffa0-2735-4bf8-b59a-d89b900511bc](https://www.loom.com/share/598e67c7c9374cda816deeb82681077e?sid=8655ffa0-2735-4bf8-b59a-d89b900511bc)
+
+
+## Technologies Used
+
+- **Frontend**: Next.js, React, Recoil, Tailwind CSS, Lucide Icons
+- **Contract/Ledger**: Solana Smart Contract with Anchor
