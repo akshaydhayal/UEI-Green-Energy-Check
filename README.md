@@ -37,3 +37,6 @@ This decentralized energy marketplace is built on the Solana blockchain, enablin
 
 - **Frontend**: Next.js, React, Recoil, Tailwind CSS, Lucide Icons
 - **Contract/Ledger**: Solana Smart Contract with Anchor
+
+  ## Assumption made
+- **Green Producer**: A Producer can either be Green or Non Green Energy Producer.(So that It is easy to implement REC.A green Energy producer can transfer REC to Charging Points but Non Green Producers can't.) 
