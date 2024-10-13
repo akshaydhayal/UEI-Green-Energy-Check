@@ -396,6 +396,7 @@ function EnergyTransactions({ producers, chargingPoints }) {
 
 {/* @ts-expect-error ignore */}
 function ProducersList({ producers }) {
+  const anchorWallet=useAnchorWallet();
     return (
         <div className="mt-8 bg-gray-800 shadow-md rounded px-8 pt-6 pb-8">
       <h2 className="text-2xl font-bold mb-4 text-green-500 flex items-center">
@@ -403,7 +404,7 @@ function ProducersList({ producers }) {
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {/* @ts-expect-error ignore */}
-        {producers.map((producer, index) => (
+        {anchorWallet?.publicKey? producers.map((producer, index) => (
             <div key={index} className="bg-gray-700 p-4 rounded-lg shadow-md">
             <h3 className="text-lg font-semibold text-green-400 mb-2">Producer {index + 1}</h3>
             <p className=" text-sm mb-1 text-green-300">
@@ -419,7 +420,7 @@ function ProducersList({ producers }) {
               <span className="text-purple-300 font-medium mr-1">Energy Rate:</span> ${producer.account.price.toString()} per kWh
             </p>
           </div>
-        ))}
+        )):<p className="text-blue-300 pl-10 w-[500px]">Connect Wallet to see all Available Energy Producers</p>}
       </div>
     </div>
   );
@@ -427,6 +428,7 @@ function ProducersList({ producers }) {
 
 {/* @ts-expect-error ignore */}
 function ChargingPointsList({ chargingPoints }) {
+  const anchorWallet=useAnchorWallet();
     return (
         <div className="mt-8 bg-gray-800 shadow-md rounded px-8 pt-6 pb-8">
       <h2 className="text-2xl font-bold mb-4 text-blue-500 flex items-center">
@@ -434,7 +436,7 @@ function ChargingPointsList({ chargingPoints }) {
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {/* @ts-expect-error ignore */}
-        {chargingPoints.map((chargingPoint, index) => (
+        {anchorWallet?.publicKey?chargingPoints.map((chargingPoint, index) => (
             <div key={index} className="bg-gray-700 p-4 rounded-lg shadow-md">
             <h3 className="text-lg font-semibold text-blue-400 mb-2">Charging Point {index + 1}</h3>
             <p className=" text-sm mb-1 text-green-300 font-semibold">
@@ -453,7 +455,27 @@ function ChargingPointsList({ chargingPoints }) {
               <span className="font-medium text-blue-300 mr-2">Non-Green Energy Rate:</span> ${chargingPoint.account.nonGreenPrice.toString()} per kWh
             </p>
           </div>
-        ))}
+        )):<p className="w-[500px] text-blue-300 pl-10">Connect Wallet to see all Available Charging Points</p>}
+        {/* {chargingPoints.map((chargingPoint, index) => (
+            <div key={index} className="bg-gray-700 p-4 rounded-lg shadow-md">
+            <h3 className="text-lg font-semibold text-blue-400 mb-2">Charging Point {index + 1}</h3>
+            <p className=" text-sm mb-1 text-green-300 font-semibold">
+              <span className="font-medium text-blue-300 mr-2">Public Key:</span> {chargingPoint.publicKey.toString().slice(0, 22)}...
+            </p>
+            <p className=" text-sm mb-1 text-green-300 font-semibold">
+              <span className="font-medium text-blue-300 mr-2">Green Energy (REC Credits) Available :</span> {chargingPoint.account.greenEnergy.toString()} kW
+            </p>
+            <p className=" text-sm mb-1 text-green-300 font-semibold">
+              <span className="font-medium text-blue-300 mr-2">Non-Green Energy Available:</span> {chargingPoint.account.nonGreenEnergy.toString()} kW
+            </p>
+            <p className=" text-sm mb-1 font-semibold text-green-300">
+              <span className="font-medium text-blue-300 mr-2">Green Energy Rate:</span> ${chargingPoint.account.greenPrice.toString()} per kWh
+            </p>
+            <p className=" text-sm text-green-300 font-semibold">
+              <span className="font-medium text-blue-300 mr-2">Non-Green Energy Rate:</span> ${chargingPoint.account.nonGreenPrice.toString()} per kWh
+            </p>
+          </div>
+        ))} */}
       </div>
     </div>
   );
