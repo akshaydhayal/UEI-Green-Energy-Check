@@ -22,7 +22,7 @@ This decentralized energy marketplace is built on the Solana blockchain, enablin
 ![Mission Details](https://github.com/akshaydhayal/UEI-Green-Energy-Check/blob/main/Green-Energy-Management%20(1).png)
 
 *Figure 2: Energy Transactions Section(b/w Producer-Charging Point and b/w Charging Point-Consumer)*
-![Mission Details](https://github.com/akshaydhayal/UEI-Green-Energy-Check/blob/main/Green-Energy-Management%20(2).png)
+![Mission Details](https://github.com/akshaydhayal/UEI-Green-Energy-Check/blob/main/Green-Energy-Management%20(3).png)
 
 *Figure 3: All Available Producers and Charging Points created*
 
