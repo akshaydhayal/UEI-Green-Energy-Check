@@ -301,7 +301,7 @@ function EnergyTransactions({ producers, chargingPoints }) {
                 {/* @ts-expect-error ignore */}
               {producers.map((producer, index) => (
                   <option key={producer.publicKey.toString()} value={producer.publicKey.toString()}>
-                  Producer {index + 1} - {producer.publicKey.toString().slice(0, 8)}...
+                  Producer {index + 1} - {producer.publicKey.toString().slice(0, 22)}...
                 </option>
               ))}
             </select>
@@ -320,7 +320,7 @@ function EnergyTransactions({ producers, chargingPoints }) {
                 {/* @ts-expect-error ignore */}
               {chargingPoints.map((chargingPoint, index) => (
                   <option key={chargingPoint.publicKey.toString()} value={chargingPoint.publicKey.toString()}>
-                  Charging Point {index + 1} - {chargingPoint.publicKey.toString().slice(0, 8)}...
+                  Charging Point {index + 1} - {chargingPoint.publicKey.toString().slice(0, 22)}...
                 </option>
               ))}
             </select>
@@ -360,7 +360,7 @@ function EnergyTransactions({ producers, chargingPoints }) {
               {/* @ts-expect-error ignore */}
               {chargingPoints.map((chargingPoint, index) => (
                   <option key={chargingPoint.publicKey.toString()} value={chargingPoint.publicKey.toString()}>
-                  Charging Point {index + 1} - {chargingPoint.publicKey.toString().slice(0, 8)}...
+                  Charging Point {index + 1} - {chargingPoint.publicKey.toString().slice(0, 22)}...
                 </option>
               ))}
             </select>
@@ -398,25 +398,25 @@ function EnergyTransactions({ producers, chargingPoints }) {
 function ProducersList({ producers }) {
     return (
         <div className="mt-8 bg-gray-800 shadow-md rounded px-8 pt-6 pb-8">
-      <h2 className="text-2xl font-bold mb-4 text-white flex items-center">
+      <h2 className="text-2xl font-bold mb-4 text-green-500 flex items-center">
         <Zap className="mr-2" /> Energy Producers
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {/* @ts-expect-error ignore */}
         {producers.map((producer, index) => (
             <div key={index} className="bg-gray-700 p-4 rounded-lg shadow-md">
-            <h3 className="text-lg font-semibold text-white mb-2">Producer {index + 1}</h3>
-            <p className="text-gray-300 text-sm mb-1">
-              <span className="font-bold">Public Key:</span> {producer.publicKey.toString().slice(0, 22)}...
+            <h3 className="text-lg font-semibold text-green-400 mb-2">Producer {index + 1}</h3>
+            <p className=" text-sm mb-1 text-green-300">
+              <span className="font-medium text-purple-300 mr-1">Public Key:</span> {producer.publicKey.toString().slice(0, 22)}...
             </p>
-            <p className="text-gray-300 text-sm mb-1">
-              <span className="font-bold"> Energy Type:</span> {producer.account.isGreen ? "Green" : "Non-Green"} Energy
+            <p className=" text-sm mb-1 text-green-300 font-semibold">
+              <span className="font-medium text-purple-300 mr-1"> Energy Type:</span> {producer.account.isGreen ? "Green" : "Non-Green"} Energy
             </p>
-            <p className="text-gray-300 text-sm mb-1">
-              <span className="font-bold">Total Energy Available:</span> {producer.account.energy.toString()} kW
+            <p className="text-sm mb-1 text-green-300 font-semibold">
+              <span className="font-medium text-purple-300 mr-1">Total Energy Available:</span> {producer.account.energy.toString()} kW
             </p>
-            <p className="text-gray-300 text-sm">
-              <span className="font-bold">Energy Rate:</span> ${producer.account.price.toString()} per kWh
+            <p className="text-sm text-green-300 font-semibold">
+              <span className="text-purple-300 font-medium mr-1">Energy Rate:</span> ${producer.account.price.toString()} per kWh
             </p>
           </div>
         ))}
@@ -429,28 +429,28 @@ function ProducersList({ producers }) {
 function ChargingPointsList({ chargingPoints }) {
     return (
         <div className="mt-8 bg-gray-800 shadow-md rounded px-8 pt-6 pb-8">
-      <h2 className="text-2xl font-bold mb-4 text-white flex items-center">
+      <h2 className="text-2xl font-bold mb-4 text-blue-500 flex items-center">
         <Battery className="mr-2" /> Charging Points
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {/* @ts-expect-error ignore */}
         {chargingPoints.map((chargingPoint, index) => (
             <div key={index} className="bg-gray-700 p-4 rounded-lg shadow-md">
-            <h3 className="text-lg font-semibold text-white mb-2">Charging Point {index + 1}</h3>
-            <p className="text-gray-300 text-sm mb-1">
-              <span className="font-bold">Public Key:</span> {chargingPoint.publicKey.toString().slice(0, 22)}...
+            <h3 className="text-lg font-semibold text-blue-400 mb-2">Charging Point {index + 1}</h3>
+            <p className=" text-sm mb-1 text-green-300 font-semibold">
+              <span className="font-medium text-blue-300 mr-2">Public Key:</span> {chargingPoint.publicKey.toString().slice(0, 22)}...
             </p>
-            <p className="text-gray-300 text-sm mb-1">
-              <span className="font-bold">Green Energy (REC Credits) Available :</span> {chargingPoint.account.greenEnergy.toString()} kW
+            <p className=" text-sm mb-1 text-green-300 font-semibold">
+              <span className="font-medium text-blue-300 mr-2">Green Energy (REC Credits) Available :</span> {chargingPoint.account.greenEnergy.toString()} kW
             </p>
-            <p className="text-gray-300 text-sm mb-1">
-              <span className="font-bold">Non-Green Energy Available:</span> {chargingPoint.account.nonGreenEnergy.toString()} kW
+            <p className=" text-sm mb-1 text-green-300 font-semibold">
+              <span className="font-medium text-blue-300 mr-2">Non-Green Energy Available:</span> {chargingPoint.account.nonGreenEnergy.toString()} kW
             </p>
-            <p className="text-gray-300 text-sm mb-1">
-              <span className="font-bold">Green Energy Rate:</span> ${chargingPoint.account.greenPrice.toString()} per kWh
+            <p className=" text-sm mb-1 font-semibold text-green-300">
+              <span className="font-medium text-blue-300 mr-2">Green Energy Rate:</span> ${chargingPoint.account.greenPrice.toString()} per kWh
             </p>
-            <p className="text-gray-300 text-sm">
-              <span className="font-bold">Non-Green Energy Rate:</span> ${chargingPoint.account.nonGreenPrice.toString()} per kWh
+            <p className=" text-sm text-green-300 font-semibold">
+              <span className="font-medium text-blue-300 mr-2">Non-Green Energy Rate:</span> ${chargingPoint.account.nonGreenPrice.toString()} per kWh
             </p>
           </div>
         ))}
